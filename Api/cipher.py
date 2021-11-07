@@ -25,25 +25,19 @@ def rotator_one(letter_index_list):
 
     for letter_index in letter_index_list:
         output_1 = output_rotator_1.index(input_rotator_1[letter_index])
+
         input_rotator_1.append(input_rotator_1.pop(0))
 
         output_2 = output_rotator_2.index(input_rotator_2[output_1])
 
-        reflector_index = reflector.index(output_2)
         encrypted_list.append(reflector[output_2])
 
-        reversed_output_1 = input_rotator_2.index(output_rotator_2[reflector_index])
-        
-
-        letter_index = input_rotator_1.index(output_rotator_1[reversed_output_1])
-        # encrypted_list.append(letter_index)
-    # print(input_rotator_1)
    
     return encrypted_list
 
 
-print(rotator_one([61,11,14]))
-# print(rotator_one(64))
+print(rotator_one([61,12,14,61,61]))
+
 
 
 def decryptor(letter_index_list):
@@ -63,23 +57,16 @@ def decryptor(letter_index_list):
 
     decrypted_list = []
     for letter_index in shifted_letter_list:
-        print(letter_index)
-        reversed_output_1 = output_rotator_1.index(input_rotator_1[letter_index])
-    
+
+        output_2 = reflector.index(letter_index)
+        
         input_rotator_1.insert(0,input_rotator_1.pop(96))
-
-        reflector_index = output_rotator_2.index(input_rotator_2[reversed_output_1])
-
-        output_2 = reflector.index(reflector_index)
-
         output_1 = input_rotator_2.index(output_rotator_2[output_2])
 
         letter = input_rotator_1.index(output_rotator_1[output_1])
         decrypted_list.append(letter)
-    # print(input_rotator_1)
-    
 
     return decrypted_list
 
 
-print(decryptor([34, 60, 37]))
+print(decryptor([34, 21, 37,43]))
