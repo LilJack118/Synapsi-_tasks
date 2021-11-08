@@ -4,6 +4,8 @@ from api import app
 
 client = TestClient(app)
 
+
+
 def test_encoder_1():
     response = client.post(
     "/encode/",

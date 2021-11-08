@@ -1,9 +1,8 @@
-from fastapi import FastAPI, Depends, HTTPException, status
+from fastapi import FastAPI, Depends, Request
 from pydantic import BaseModel
 import string
 import secrets
 import base64
-import json
 from cipher import encoder, decryptor
 from fastapi.security import HTTPBasic, HTTPBasicCredentials
 
@@ -15,10 +14,17 @@ app = FastAPI()
 security = HTTPBasic()
 
 
+@app.get("/users/me")
+def read_current_user(request: Request, credentials: HTTPBasicCredentials = Depends(security)):
+    print(request.headers)
+    return {"username": credentials.username, "password": credentials.password}
+
+
 
 
 @app.post("/encode/")
-async def encode_message(message: Message, credentials: HTTPBasicCredentials = Depends(security)):
+async def encode_message(request: Request,message: Message, credentials: HTTPBasicCredentials = Depends(security)):
+    print(request.headers)
     correct_username = secrets.compare_digest(credentials.username, "admin")
     correct_password = secrets.compare_digest(credentials.password, "1234")
     if not (correct_username and correct_password):
