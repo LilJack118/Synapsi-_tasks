@@ -21,7 +21,7 @@ async def root():
 async def create(item: Item):
     letter_list = [string.printable.index(x) for x in item.Message]
     encoded_message = encoder(letter_list)
-    encoded_message_bytes = (b''.join([(x).to_bytes(2, byteorder='big') for x in encoded_message]))
+    encoded_message_bytes = (b''.join([bytes([x]) for x in encoded_message]))
     encoded = base64.b64encode(encoded_message_bytes)
     item.Message = encoded
 
@@ -31,10 +31,7 @@ async def create(item: Item):
 @app.post("/decode/")
 async def create(item: Item):
     decoded_base64 = base64.b64decode(item.Message)
-    decoded_list = decryptor(decoded_base64)
-    decoded_message = ''
-    for letter_index in decoded_list:
-        decoded_message +=string.printable[letter_index]
-    print(decoded_list)
+    decoded_list = decryptor([x for x in decoded_base64])
+    item.Message = ''.join([string.printable[index] for index in decoded_list])
 
     return item
