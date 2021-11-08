@@ -4,16 +4,6 @@ import random
 import base64
 import json
 
-l = 'V1xLFh8TKyQuEUs='
-
-list_s = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96] 
-
-# for el in range(97):
-#     list_s.append(el)
-
-# print(list_s)
-# random.shuffle(list_s)
-# print(list_s)
 
 def encoder(letter_index_list):
     encrypted_list = []
@@ -38,8 +28,6 @@ def encoder(letter_index_list):
    
     return encrypted_list
 
-
-print(encoder([61,12,14,61,61]))
 
 
 
@@ -71,12 +59,3 @@ def decryptor(letter_index_list):
 
     return decrypted_list
 
-
-print(decryptor([34, 21, 37,43]))
-
-
-encoded_list = encoder([61,12,14,61,61])
-json_encoded_list = json.dumps(encoded_list)
-json_encoded = str.encode(json_encoded_list)
-encoded = base64.b64encode(json_encoded)
-print(encoded)
