@@ -14,13 +14,6 @@ app = FastAPI()
 security = HTTPBasic()
 
 
-@app.get("/users/me")
-def read_current_user(request: Request, credentials: HTTPBasicCredentials = Depends(security)):
-    print(request.headers)
-    return {"username": credentials.username, "password": credentials.password}
-
-
-
 
 @app.post("/encode/")
 async def encode_message(request: Request,message: Message, credentials: HTTPBasicCredentials = Depends(security)):
