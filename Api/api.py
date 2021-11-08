@@ -3,7 +3,7 @@ from pydantic import BaseModel
 import string
 import secrets
 import base64
-from cipher import encoder, decryptor
+from .cipher import encoder, decryptor
 from fastapi.security import HTTPBasic, HTTPBasicCredentials
 
 class Message(BaseModel):
